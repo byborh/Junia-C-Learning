@@ -49,7 +49,7 @@ int main() {
   printf("\nRésultat: %.2f", moy);
 
   for (int i=1; i <= 10; i++) {
-    printf("\nBonjour le numéro %d", i);
+    printf("\nBonjour le numéro %d", i); 
   }
     
   return 0;
