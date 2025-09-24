@@ -31,11 +31,22 @@ int main() {
 
   moy = ((note1*coef1)+(note2*coef2)) / (coef1 + coef2);
 
+  // Apprendre à faire des conditions avec if
   if(moy < 10) printf("T'es vrm une grosse merde enft `\n");
   else if (moy < 15 && moy > 10) printf("Bien !`\n");
   else printf("TROP FORT `\n");
 
-  printf("Résultat: %.2f", moy);
+  // Apprendre à faire des conditions avec switch
+  switch((int)moy) {
+    case 12:
+      printf("Tu as 12 de moyenne, lesgoo\n");
+      break;
+    // default: // Default est facultatif finalement...
+    //   printf("Désolé, tu n'as pas eu 12, j'aurais pu t'augmenter la moyenne...");
+    //   break;
+  }
+
+  printf("\nRésultat: %.2f", moy);
     
   return 0;
 }
