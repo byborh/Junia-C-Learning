@@ -23,6 +23,6 @@ int main() {
     } else if(moyenne > 16) {
         printf("passable");
     }
-
+ 
     return 0;
 }
