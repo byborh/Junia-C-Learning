@@ -10,17 +10,10 @@ int main() {
     char req[50], req1[50];
 
     printf("Veuillez saisir un nombre que vous voulez inverser !\n");
-    scanf("%s", req);
+    scanf("%s", req); // A CHANGER ET METTRE EN ENTIER A L'ENTIER
 
     // c pour copier la requête de base
     strcpy(req1, req);    
-
-
-    /*
-        int left, right = 0, strlen(req)-1;
-        left < right;
-        left++, right--
-    */
 
     int left = 0;
     int right = strlen(req)-1;

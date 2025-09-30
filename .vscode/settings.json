@@ -5,7 +5,8 @@
         "stack": "c",
         "cmath": "c",
         "ios": "c",
-        "xiosbase": "c"
+        "xiosbase": "c",
+        "chrono": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
