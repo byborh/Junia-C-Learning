@@ -14,8 +14,7 @@ int main() {
   // printf("Bonjour %s %s\n", nom, prenom);
 
 
-  float note1, note2, moy;
-  float coef1, coef2;
+  float note1, note2, moy, coef1, coef2;
 
   printf("note1:");
   scanf("%f", &note1);
@@ -48,9 +47,9 @@ int main() {
 
   printf("\nRésultat: %.2f", moy);
 
-  for (int i=1; i <= 10; i++) {
-    printf("\nBonjour le numéro %d", i); 
-  }
+  // for (int i=1; i <= 10; i++) {
+  //   printf("\nBonjour le numéro %d", i); 
+  // }
     
   return 0;
 }
