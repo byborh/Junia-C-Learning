@@ -6,7 +6,18 @@
         "cmath": "c",
         "ios": "c",
         "xiosbase": "c",
-        "chrono": "c"
+        "chrono": "c",
+        "complex": "c",
+        "functional": "c",
+        "optional": "c",
+        "regex": "c",
+        "system_error": "c",
+        "type_traits": "c",
+        "xlocmon": "c",
+        "xlocnum": "c",
+        "xtr1common": "c",
+        "random": "c",
+        "stdio.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
