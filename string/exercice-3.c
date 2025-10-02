@@ -8,17 +8,23 @@ int main() {
         résultat dans une autre sans utiliser la bibliothèque <string.h>
     */
 
-    char c[];
+    char tab[100];
+    char res[100];
+    int i = 0, len = 0;
 
     printf("Veuillez saisir un mot ! \n");
-    scanf("%s", c);
+    scanf("%s", tab);
 
-    int left = 0;
-    right
+    while(tab[len] != '\0') len++;
 
-    char c[] = "abcdefg";
-    int i = 0;
-    while(c[i] != '\0') i++;
-    printf("Voici le nombre de char dans c[]: %d !", i);
+
+    for(int i = 0; i < len; i++) res[i] = tab[len - 1 - i];
+
+    res[len] = '\0';
+
+
+    printf("Voici le nombre de char dans c[]: %s !", res);
+    
+    return 0;
 }
 
