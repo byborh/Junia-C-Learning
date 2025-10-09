@@ -1,37 +1,37 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 int main() {
+    char input[100];
+    char cleaned[100];
+    int len, i, j = 0;
 
-    /*    
-        On appelle palindrome une suite de caractères qui se lit de la même façon dans les deux sens
-        (exemple : ‘’ laval ‘’, ‘’ressasser ‘’, ‘’engage le jeu que je le gagne’’…).
-        Écrire un programme qui permet de déterminer si une suite de caractères est un palindrome. Il
-        devra pouvoir traiter des mots autant que des phrases.
-    */
+    printf("Veuillez saisir quelque chose :\n");
+    fgets(input, sizeof(input), stdin);
 
-    
-    char palindrome[100];
+    // Supprimer le saut de ligne à la fin
+    len = strlen(input);
+    if(input[len-1] == '\n') {
+        input[len-1] = '\0';
+    }
 
+    // Nettoyage: enlever espaces, ponctuations, mettre en minuscules
+    for(int i = 0; input[i] != '\0'; i++) if(isalnum(input[i])) cleaned[j++] = tolower(input[i]);
+    cleaned[j] = '\0';
 
-    printf("Veuillez saisir quelque chose: \n");
-    fgets(palindrome, sizeof(palindrome), stdin);
-
-    int palindrome_length = strlen(palindrome);
-
-
-    // Supprimer les sauts de lignes 
-    
-
-    for(int i = 0; i < palindrome_length / 2; i++) {
-        if(palindrome[i] != palindrome[palindrome_length - 1 - i]) {
-            printf("C'est pas un mot palindrome !");
-            return 0;
+    // Vérification du palindrome
+    int is_palindrome = 1;
+    int n = strlen(cleaned);
+    for(int i = 0; i < n / 2; i++) {
+        if(cleaned[i] != cleaned[n - 1 - i]) {
+            is_palindrome = 0;
+            break;
         }
     }
 
-    printf("C'est un mot palindrome !!!");
-    
+    if (is_palindrome) printf("C'est un palindrome !!!\n");
+    else printf("Ce n'est pas un palindrome !\n");
+
     return 0;
 }
-
