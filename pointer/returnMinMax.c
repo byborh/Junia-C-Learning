@@ -14,12 +14,9 @@ int main() {
     int min = INT_MAX;
     int max = INT_MIN;
 
-    int* pMin = &min;
-    int* pMax = &max;
-
     int tab[5] = {4, 5, 78, 1, 77};
 
-    returnMinMaxOfTable(tab, pMin, pMax);
+    returnMinMaxOfTable(tab, &min, &max);
 
     printf("Voici le minimum du tableau: %d et voici donc le maximum: %d\n", min, max);
 
