@@ -8,7 +8,7 @@
 /*
     Pour contrôler l’irrigation de ses champs, un agriculteur a installé un capteur de température et des
     capteurs d’humidité dans des emplacements distants sur le champ.
-
+    
     Il a chargé un ouvrier pour prendre les mesures indiquées par les capteurs un nombre de fois défini
     par jour par l’utilisateur. Dans ce sens, il souhaite avoir une application qui permet de faciliter la
     tâche de contrôle d’irrigation.
@@ -30,10 +30,10 @@
         d’irrigation.
 */
 
-void afficherMesures(const int mesures[], int n, const char* label);
-void modifierMesure(int mesures[], int n, const char* label);
-void afficherMinMaxHumidite(const int humidites[], int n);
-void calculerMoyennes(const int temperatures[], const int humidites[], int n);
+void showMeasures(const int mesures[], int n, const char* label);
+void modifyMeasures(int mesures[], int n, const char* label);
+void showMinMaxHumidity(const int humidites[], int n);
+void calculateAvarage(const int temperatures[], const int humidites[], int n);
 void calculerEcartTypeHumidite(const int humidites[], int n);
 
 int main() {
@@ -41,19 +41,28 @@ int main() {
     int nbMesures;
     int choix;
 
-    srand(time(NULL)); // Initialiser le générateur aléatoire
 
-    // Demander le nombre de mesures à effectuer
+
+    printf("Combien de prises de mesures souhaitez-vous faire ? (1 à %d) : ", MAX_MESURES);
+    scanf("%d", &nbMesures);
+
     do {
-        printf("Combien de prises de mesures souhaitez-vous faire ? (1 à %d) : ", MAX_MESURES);
-        scanf("%d", &nbMesures);
-    } while (nbMesures < 1 || nbMesures > MAX_MESURES);
+        for (int i = 0; i < nbMesures; i++) {
+            printf("Veuillez saisir les mesures pris pour la temperatures : ");
+            scanf("%d", &temperatures[i]);
+        }
+    } while(nbMesures < 1 || nbMesures > MAX_MESURES);
+    
 
-    // Génération aléatoire des mesures
-    for (int i = 0; i < nbMesures; i++) {
-        temperatures[i] = rand() % 41;  // Température entre 0 et 40
-        humidites[i] = rand() % 101;    // Humidité entre 0 et 100
-    }
+    do {
+        for (int i = 0; i < nbMesures; i++) {
+            printf("Veuillez saisir les mesures pris pour l'humidité : ");
+            scanf("%d", &humidites[i]);
+        }
+    } while(nbMesures < 1 || nbMesures > MAX_MESURES);
+
+
+
 
     // Menu utilisateur
     do {
@@ -70,20 +79,20 @@ int main() {
 
         switch (choix) {
             case 1:
-                afficherMesures(temperatures, nbMesures, "Température");
+                showMeasures(temperatures, nbMesures, "Température");
                 break;
             case 2:
-                afficherMesures(humidites, nbMesures, "Humidité");
+                showMeasures(humidites, nbMesures, "Humidité");
                 break;
             case 3:
-                modifierMesure(temperatures, nbMesures, "Température");
-                modifierMesure(humidites, nbMesures, "Humidité");
+                modifyMeasures(temperatures, nbMesures, "Température");
+                modifyMeasures(humidites, nbMesures, "Humidité");
                 break;
             case 4:
-                afficherMinMaxHumidite(humidites, nbMesures);
+                showMinMaxHumidity(humidites, nbMesures);
                 break;
             case 5:
-                calculerMoyennes(temperatures, humidites, nbMesures);
+                calculateAvarage(temperatures, humidites, nbMesures);
                 break;
             case 6:
                 calculerEcartTypeHumidite(humidites, nbMesures);
@@ -100,7 +109,7 @@ int main() {
 }
 
 // j'ffiche un tableau de mesures
-void afficherMesures(const int mesures[], int n, const char* label) {
+void showMeasures(const int mesures[], int n, const char* label) {
     printf("\nMesures de %s :\n", label);
     for (int i = 0; i < n; i++) {
         printf("  Prise %2d : %d\n", i + 1, mesures[i]);
@@ -108,7 +117,7 @@ void afficherMesures(const int mesures[], int n, const char* label) {
 }
 
 // modifier une mesure
-void modifierMesure(int mesures[], int n, const char* label) {
+void modifyMeasures(int mesures[], int n, const char* label) {
     int index, nouvelleValeur;
 
     printf("\nModification de la mesure de %s\n", label);
@@ -128,8 +137,8 @@ void modifierMesure(int mesures[], int n, const char* label) {
     printf("Modification réussie.\n");
 }
 
-// Affiche l'humidité maximale et minimale avec leurs indices
-void afficherMinMaxHumidite(const int humidites[], int n) {
+// ça affiche l'humidité maximale et minimale avec leu index
+void showMinMaxHumidity(const int humidites[], int n) {
     int min = humidites[0], max = humidites[0];
     int idxMin = 0, idxMax = 0;
 
@@ -149,7 +158,7 @@ void afficherMinMaxHumidite(const int humidites[], int n) {
 }
 
 // Calculer et afficher les moyennes
-void calculerMoyennes(const int temperatures[], const int humidites[], int n) {
+void calculateAvarage(const int temperatures[], const int humidites[], int n) {
     float sommeTemp = 0, sommeHum = 0;
 
     for (int i = 0; i < n; i++) {
@@ -165,13 +174,11 @@ void calculerMoyennes(const int temperatures[], const int humidites[], int n) {
 void calculerEcartTypeHumidite(const int humidites[], int n) {
     float moyenne = 0, sommeCarres = 0, ecartType;
 
-    // Calcul de la moyenne
     for (int i = 0; i < n; i++) {
         moyenne += humidites[i];
     }
     moyenne /= n;
 
-    // Calcul de la somme des carrés des écarts
     for (int i = 0; i < n; i++) {
         sommeCarres += pow(humidites[i] - moyenne, 2);
     }
@@ -180,7 +187,6 @@ void calculerEcartTypeHumidite(const int humidites[], int n) {
 
     printf("\nÉcart-type de l'humidité : %.2f\n", ecartType);
 
-    // Diagnostic simple
     if (ecartType < 5) {
         printf("Humidité très stable. vérifies juste que le capteur fonctionne bien.\n");
     } else if (ecartType > 25) {
