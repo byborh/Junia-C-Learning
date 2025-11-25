@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <limits.h>
 
-void returnMinMaxOfTable(int tab[], int* min, int *max) {
+void returnMinMaxOfTable(int tab[], int* min, int* max) {
     
     for(int i = 0; i < 5; i++) {
         if(*max < tab[i]) *max = tab[i];
