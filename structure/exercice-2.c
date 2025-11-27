@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX = 100;
+#define MAX 100
 
 typedef struct {
     int id; 
@@ -10,11 +10,11 @@ typedef struct {
     float average;
 } Student;
 
-void createStudents(Student t[], int *n) {}
-void getStudents(const Student t[], int n) {}
-void getStudent(const Student t[], int n) {}
-void deleteStudent(const Student t[], int *n) {}
-void getAverage(const Student t[], int n) {}
+void createStudents(Student t[], int *n);
+void getStudents(const Student t[], int n);
+void getStudent(const Student t[], int n);
+void deleteStudent(Student t[], int *n);
+void getAverage(const Student t[], int n);
 
 
 int main(void) {
@@ -38,7 +38,7 @@ int main(void) {
             case 2: getStudents(tab, nb);       break;
             case 3: getStudent(tab, nb);        break;
             case 4: deleteStudent(tab, &nb);    break;
-            case 5: getAverage(tab, &nb);       break;
+            case 5: getAverage(tab, nb);        break;
             case 0: puts("Bye.");               break;
             default: puts("Choix invalide.");
         }
@@ -52,17 +52,73 @@ void createStudents(Student t[], int *n) {
     printf("Combien d'étudiant voulez vous hyn ? (max: %d)", MAX);
     scanf("%d", &k);
     if(k> 100) k = 100;
-    for(int i = 0, i < n*, ++i) {
+    for(int i = 0; i < k; ++i) {
         printf("ID : ");      scanf("%d", &t[i].id);
         printf("Nom : ");     scanf("%29s", t[i].name);
         printf("Prenom : ");  scanf("%29s", t[i].surname);
         printf("Moyenne : "); scanf("%f", &t[i].average);
     }
+
+    *n = k;
 }
 
 void getStudents(const Student t[], int n) {
-    if(n == 0) puts("Liste vide gros"); return;
+    if(n == 0) {
+        puts("Liste vide gros");
+        return;
+    }
+
     for(int i = 0; i < n; ++i)
         printf("%2d) [%d] %s %s  moy=%.2f\n",
             i + 1, t[i].id, t[i].name, t[i].surname, t[i].average);
+}
+
+void getStudent(const Student t[], int n) {
+    int id, fund = 0;
+    printf("ID qu'on recherche ?\n");
+    scanf("%d", &id);
+
+    for(int i = 0; i < n; ++i) {
+        if(t[i].id == id) {
+            printf("Trouvé : %s %s (moy=%.2f)\n",
+                   t[i].name, t[i].surname, t[i].average);
+            fund = 1;
+            break;
+        }
+    }
+    if(!fund) printf("Aucun élève avec cet ID :(\n");
+}
+
+void deleteStudent(Student t[], int *n) {
+    int id;
+    getStudents(t, *n);
+    printf("ID qu'on recherche à supprimer ?\n");
+    scanf("%d", &id);
+
+    int pos = -1;
+    for(int i = 0; i < *n; ++i) {
+        if(t[i].id == id) {
+            pos = i;
+            break;
+        }
+    }
+
+    if(pos == -1) {
+        printf("Aucun élève avec cet ID :(\n)");
+        return;
+    }
+
+    // Décalage à gauche hé beh
+    for(int i = 0; i < *n; ++i) {
+        t[i] = t[i+1];
+        (*n)--;
+        puts("Etudiant supprimé lesgoooo");
+    }
+}
+
+void getAverage(const Student t[], int n) {
+    if(n == 0) { puts("Aucun étudiant n'est trouvé"); return; }
+    float average = 0.0f;
+    for(int i = 0; i < n; ++i) { average += t[i].average; }
+    printf("Moyenne de la classe : %.2f\n", average / n);
 }
